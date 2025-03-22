@@ -1,4 +1,4 @@
-import { Component, ErrorInfo, ReactElement } from "react";
+import { Component, ReactElement } from "react";
 
 
 interface Props{
@@ -18,10 +18,9 @@ class ErrorBoundary extends Component<Props, State>{
     return { hasError: true };
   }
 
-  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // eslint-disable-next-line no-console
-  }
     public render() {
+      
+      
         if (this.state.hasError) {
           return (
             <>
