@@ -26,6 +26,11 @@ type notif_Activity_Contact_Props = {
     title:string,
     date?:string
 }
+type asideProps ={
+    sectionName:string,
+    items:any[],
+}
+
 export const metrics:metricsProps[] = [
     {
         title:"Requests",
@@ -141,4 +146,20 @@ export const trafficConstant = [
         name:"Instagram",
         img: bar3
     },
+]
+
+
+export const asideConstant:asideProps[] = [
+    {
+        sectionName:"Notifications",
+        items:notifConstant
+    },
+    {
+        sectionName:"Activities",
+        items:activityConstant
+    },
+    {
+        sectionName:"Contacts",
+        items:contactConstant
+    }
 ]
