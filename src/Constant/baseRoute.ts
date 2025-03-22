@@ -1,5 +1,7 @@
+import DashboardLayout from "@/Layout"
+import DashboardRoute from "../Modules/Dashboard/routes"
 import { BASE_PATHS } from "./path"
-import AuthRoute from "../Modules/Auth/routes"
+
 
 
 type Props = {
@@ -11,9 +13,9 @@ type Props = {
 
 export const BASE_ROUTES: Props[] = [
     {
-        path: `${BASE_PATHS.AUTH}/*`,
-        Component: AuthRoute,
-        Layout: null,
+        path: `${BASE_PATHS.APP}/*`,
+        Component: DashboardRoute,
+        Layout: DashboardLayout,
         useAuth: false
     }
 ]

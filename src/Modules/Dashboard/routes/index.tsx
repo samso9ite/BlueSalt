@@ -1,16 +1,13 @@
-import { FunctionComponent } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { AUTH_PATHS } from "../../../Constant/path";
+import { FunctionComponent } from "react"
+import { Navigate, Route, Routes } from "react-router-dom"
+import Overview from "../pages/Overview"
 
-import Signup from "../pages/Signup";
-
-
-const AuthRoute:FunctionComponent<Record<string, never>> = () => {
+const DashboardRoute:FunctionComponent<Record<string,never>> = () => {
     return(
         <Routes>
             <Route path="/">
-                <Route path="" element={<Navigate to="signin" replace /> } />
-                <Route path={AUTH_PATHS.SIGNUP} element={< Signup/>} />
+                <Route path="" element={<Navigate to="/overview" replace /> } />
+                <Route path="/dashboard" element={<Overview />}  />
             </Route>
             <Route
                 path="*"
@@ -27,7 +24,6 @@ const AuthRoute:FunctionComponent<Record<string, never>> = () => {
                 }
             />
         </Routes>
-    )
-}
+    )}
 
-export default AuthRoute
+export default DashboardRoute

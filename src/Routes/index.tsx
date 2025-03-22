@@ -1,10 +1,8 @@
 import { FunctionComponent, Suspense } from "react";
-import ErrorBoundary from "../Components/ErrorBoundary";
-import Loader from "../Components/UI/loader";
-// import { BrowserRouter } from "react-router-dom";
+import ErrorBoundary from "../components/ErrorBoundary";
+import Loader from "../components/Interface/loader"
 import { Routes as BrowserRoutes, BrowserRouter, Route } from "react-router-dom";
 import { BASE_ROUTES } from "../Constant/baseRoute";
-import PrivateRoute from "./PrivateRoute";
 
 const Routes:FunctionComponent<Record<string, never>> = () => {
     return(
@@ -13,17 +11,17 @@ const Routes:FunctionComponent<Record<string, never>> = () => {
                <BrowserRouter basename="/">
                     <BrowserRoutes>
                         {
-                            BASE_ROUTES.map(({useAuth, path, Component, Layout}) => (
+                            BASE_ROUTES.map(({path, Component, Layout}) => (
                                 <Route
                                     path={path}
                                     key={path}
                                     element={
                                             Layout ? (
-                                                <PrivateRoute>
+                                                // <PrivateRoute>
                                                     <Layout>
                                                         <Component />
                                                     </Layout>
-                                                </PrivateRoute>
+                                                // </PrivateRoute>
                                         ) : (
                                         <Component />
                                     )
