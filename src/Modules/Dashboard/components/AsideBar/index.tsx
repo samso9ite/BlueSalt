@@ -13,7 +13,7 @@ const AsideBar:FC = ()  => {
             <CardContent className="pt-5">
                 <p className="text-[15px] font-extralight mb-1  transition-transform duration-300 hover:translate-x-2">Notifications</p>
                 {notifConstant.map((item) => (
-                   <div className="flex items-center gap-3 space-y-4 font-extralight hover:translate-x-1
+                   <div className="flex items-center gap-3 space-y-4 duration-300  font-extralight hover:translate-x-1
                     hover:bg-[#f3ecec] hover:rounded-lg hover:font-normal">
                    <img src={item.img} className="h-6 rounded bg-[#f3ecec] p-[4px]" />
                    
