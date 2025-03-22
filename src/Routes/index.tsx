@@ -1,5 +1,5 @@
 import { FunctionComponent, Suspense } from "react";
-import ErrorBoundary from "@/components/ErrorBoundary";
+import ErrorBoundary from "@/ErrorBoundary";
 import Loader from "@/components/Interface/loader"
 import { Routes as BrowserRoutes, BrowserRouter, Route } from "react-router-dom";
 import { BASE_ROUTES } from "../Constant/baseRoute";
