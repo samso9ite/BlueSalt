@@ -6,7 +6,7 @@ const DashboardRoute:FunctionComponent<Record<string,never>> = () => {
     return(
         <Routes>
             <Route path="/">
-                <Route path="" element={<Navigate to="/overview" replace /> } />
+                <Route path="" element={<Navigate to="/dashboard" replace /> } />
                 <Route path="/dashboard" element={<Overview />}  />
             </Route>
             <Route
