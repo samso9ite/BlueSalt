@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
-// Define props for the styled component
 interface LightProps {
   color: string;
   active: boolean;
@@ -72,7 +71,7 @@ const CenteredContainer = styled.div`
 `;
 
 
-// Traffic Light Component
+// Street A Traffic Light Component
 const TrafficLightBoxA = ({activeLightA}:{ activeLightA: "red" | "yellow" | "green" }) => {
  
   return (
@@ -85,6 +84,7 @@ const TrafficLightBoxA = ({activeLightA}:{ activeLightA: "red" | "yellow" | "gre
   );
 };
 
+// Street B Traffic Light Component
 const TrafficLightBoxB = ({activeLightB}:{ activeLightB: "red" | "yellow" | "green" }) => {
  
     return (
@@ -100,44 +100,47 @@ const TrafficLightBoxB = ({activeLightB}:{ activeLightB: "red" | "yellow" | "gre
 // Main Component
 const TrafficLightSystem = () => {
     const [start, setStart] = useState<boolean>(false)
+    const isRunning = useRef(false);
     const [activeLightA, setActiveLightA] = useState<"red" | "yellow" | "green">("red");
     const [activeLightB, setActiveLightB] = useState<"red" | "yellow" | "green">("red");
  
     useEffect(() => {
+        if (!start) return; // Don't run if start button isn't clicked
+        if (isRunning.current) return; // Prevent multiple loop
+        isRunning.current = true;
+    
         const trafficCycle = async () => {
-          // Step 1: Street A turns green, Street B stays red (One Cycle)
-          setActiveLightA("green");
-          setActiveLightB("red");
-          await new Promise((resolve) => setTimeout(resolve, 10000));
+          while (isRunning.current) {
+            setActiveLightA("green");
+            setActiveLightB("red");
+            await new Promise((resolve) => setTimeout(resolve, 10000));
     
-          // Step 2: Both turn yellow (Half Cycle)
-          setActiveLightA("yellow");
-          setActiveLightB("yellow");
-          await new Promise((resolve) => setTimeout(resolve, 5000));
+            setActiveLightA("yellow");
+            setActiveLightB("yellow");
+            await new Promise((resolve) => setTimeout(resolve, 5000));
     
-          // Step 3: Street A turns red, Street B turns green (One Cycle)
-          setActiveLightA("red");
-          setActiveLightB("green");
-          await new Promise((resolve) => setTimeout(resolve, 10000));
+            setActiveLightA("red");
+            setActiveLightB("green");
+            await new Promise((resolve) => setTimeout(resolve, 10000));
     
-          // Step 4: Both turn yellow again (Half Cycle)
-          setActiveLightA("yellow");
-          setActiveLightB("yellow");
-          await new Promise((resolve) => setTimeout(resolve, 5000));
-    
-          // Step 5: Restart the cycle
-          trafficCycle();
+            setActiveLightA("yellow");
+            setActiveLightB("yellow");
+            await new Promise((resolve) => setTimeout(resolve, 5000));
+          }
         };
-        if(start){
-            trafficCycle();
-        }
-    }, [start]);
-   
-    const resetHandler = () => {
-            setActiveLightA("green")
-            setActiveLightB("red")
-            // setStart(false)
-      }
+    
+        trafficCycle();
+    
+        return () => {
+          isRunning.current = false; 
+        };
+      }, [start]);
+    
+      const resetHandler = () => {
+        isRunning.current = false; 
+        setActiveLightA("green"); // Reset to initial state
+        setActiveLightB("red");// Reset to initial state
+      };
   return (
     <>  
     <div className="flex justify-center">
@@ -152,8 +155,8 @@ const TrafficLightSystem = () => {
                     <StyledButton onClick={resetHandler}>Reset</StyledButton>
                     <TrafficLightBoxA activeLightA={activeLightA}/>
                 </IntersectionA>
-                    <IntersectionB>
-                        <TrafficLightBoxB activeLightB={activeLightB}/>
+                <IntersectionB>
+                    <TrafficLightBoxB activeLightB={activeLightB}/>
                 </IntersectionB>
             </CenteredContainer>
             <h3 className="mt-10 font-medium absolute top-[13rem] right-[27rem] font-bold">Street B</h3>
