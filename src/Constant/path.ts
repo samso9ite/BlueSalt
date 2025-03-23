@@ -1,8 +1,10 @@
 type BASE_PATHS_PROPS = {
-    APP: string
+    APP: string,
+    TRAFFICSYSTEM:string
 }
 
 
 export const BASE_PATHS:BASE_PATHS_PROPS = {
-    APP: ""
+    APP: "",
+    TRAFFICSYSTEM:"traffic-system"
 }

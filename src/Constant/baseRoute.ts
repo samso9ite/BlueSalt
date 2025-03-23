@@ -1,6 +1,7 @@
 import DashboardLayout from "@/Layout"
 import DashboardRoute from "../Modules/Dashboard/routes"
 import { BASE_PATHS } from "./path"
+import TrafficSystemRoute from "@/Modules/TrafficLight/route"
 
 
 
@@ -17,5 +18,12 @@ export const BASE_ROUTES: Props[] = [
         Component: DashboardRoute,
         Layout: DashboardLayout,
         useAuth: false
-    }
+    },
+    {
+        path: `${BASE_PATHS.TRAFFICSYSTEM}/*`,
+        Component: TrafficSystemRoute,
+        Layout: null,
+        useAuth: false
+    },
+    
 ]
